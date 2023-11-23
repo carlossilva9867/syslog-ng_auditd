@@ -58,7 +58,6 @@ Clone o repositório ou copie o código para o seu sistema.
 
 ```
 git clone https://github.com/carlossilva9867/syslog-ng_auditd
-
 ```
 
 ### Configuração
