@@ -1,85 +1,118 @@
-
 # syslog-ng_auditd
 
+Este script tem como objetivo automatizar o processo de configuração do envio de logs do serviço auditd para um servidor syslog remoto (SIEM) ou repositório remoto, utilizando o serviço syslog-ng presente na maioria dos sistemas operacionais baseados em Linux.
+
+## Arquitetura
+imagem
+
 ## Funcionamento do script
+
 - Verificar se o serviço syslog está instalado.
 - Verificar se o serviço auditd está instalado.
 - Se os parâmetros de verificação estiverem OK, o script iniciará o processo de configuração do serviço syslog-ng, adicionando as seguintes etapas:
-    - Etapas de Configuração:
-    - Backup de Configuração:
+- Etapas de Configuração:
+- Backup de Configuração:
 
+ 
+## Etapas da execução
 1) Realizar backup dos arquivos de configuração do syslog-ng para garantir a reversibilidade das alterações.
+
 2) Configuração do syslog-ng para Envio Remoto:
+
 3) Adicionar configurações ao syslog-ng para direcionar os logs do auditd para um servidor syslog remoto ou repositório remoto.
+
 4) Reiniciar o serviço syslog-ng para aplicar as alterações feitas na configuração.
+
 5) Validação da Inicialização do Serviço:
+
 6) Verificar se o serviço syslog-ng foi reiniciado com sucesso.
 
-## Observações:
-- Certifique-se de executar o script com privilégios de root ou utilizando o sudo.
-- Antes de executar em um ambiente de produção, é recomendável testar o script em um ambiente controlado.
-- Este script foi testado em sistemas operacionais Debian e Red Hat, podendo necessitar de adaptações para outros sistemas Linux.
-- Este script visa simplificar a tarefa de configurar a integração entre o serviço auditd e o syslog-ng, facilitando o monitoramento centralizado de eventos de segurança. Contribuições são bem-vindas para aprimorar e expandir as funcionalidades do script.
+  
 
+## Observações:
+
+- Certifique-se de executar o script com privilégios de root ou utilizando o sudo.
+
+- Antes de executar em um ambiente de produção, é recomendável testar o script em um ambiente controlado.
+
+- Este script foi testado em sistemas operacionais Debian e Red Hat, podendo necessitar de adaptações para outros sistemas Linux.
+
+- Este script visa simplificar a tarefa de configurar a integração entre o serviço auditd e o syslog-ng, facilitando o monitoramento centralizado de eventos de segurança.
+
+- Contribuições são bem-vindas para aprimorar e expandir as funcionalidades do script.
+
+  
 
 ### Pré-requisitos
 
 - O script deve ser executado com privilégios de root ou sudo.
+
 - O serviço `auditd` deve estar instalado e em execução.
+
 - O serviço `syslog-ng` deve estar instalado e em execução.
 
-### Configuração
-
-**Variaveis**
-syslog_host=192.168.15.133 # servidor remoto syslog
-syslog_port=514 # porta
-
 ### Instalação
+
 Clone o repositório ou copie o código para o seu sistema.
-```
-git clone https://github.com/carlossilva9867/syslog-ng_auditd
+
 ```
 
-Altere os valores da variavel syslog_host e syslog_port para o endereço do servidor de syslog da rede
+git clone https://github.com/carlossilva9867/syslog-ng_auditd
+
+```
+
+### Configuração
+Altere os valores da variável os valores
+
+**IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs
+**PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)
+
+```
+sed -i 's/syslog_host=.*$/syslog_host=IP_SYSLOG_REMOTO/' configure_syslog.sh
+sed -i 's/syslog_port=.*$/syslog_port=PORTA_SYSLOG_REMOTO/' configure_syslog.sh
+```
 
 Execute o comando para executar o script
 ```
 sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ```
-### Arquivo de configuração utilizado (syslog-ng):
-Criar o arquivo em /etc/syslog-ng/conf.d/
 
+----
+
+### Arquivo de configuração utilizado (syslog-ng):
+Caso queira adicionar a configuração do syslog manualmente no servidor, basta criar um arquivo de configuração em /etc/syslog-ng/conf.d/. Não se esqueça de alterar os valores $syslog_host e $syslog_port.
 ```
-# Configuraççao do auditd para envio -> SYSLOG SERVER 
+# Configuração AUDITD < SYSLOG > REMOTE LOG
+
 # Log de origem (auditd)
 source s_auditd {
-    file(/var/log/audit/audit.log flags(no-parse));
+file(/var/log/audit/audit.log flags(no-parse));
 };
 
-## Filter
-# Filtando somente por tipos de eventos especificos 
+## Filter (OPCIONA) 
+# Filtando por tipos de registros de auditoria
 filter f_auditd {
-    #program("auditd");
-    match("type=(USER_CMD|LOGIN|CRED_ACQ)");
+	match("type=(USER_CMD|LOGIN|CRED_ACQ)");
 };
 
-## Destination 
+## Declarando qual o servidor e porta que será o repositorio de log
 # Envio de log via TCP para o syslog server
-destination d_syslog_tcp {
-    syslog("$syslog_host" transport("tcp") 
-    port("$syslog_port")); 
+	destination d_syslog_tcp {
+	syslog("$syslog_host" transport("tcp")
+	port("$syslog_port"));
 };
 
 ## Envio
 # Confiurando o envio de log para o syslog-server
-log { 
-    source(s_auditd);
-    filter(f_auditd);
-    destination(d_syslog_tcp);
+log {
+	source(s_auditd);
+	filter(f_auditd);
+	destination(d_syslog_tcp);
 };
 ```
 
-### OPÇÕES PARA FILTRAGEM DE EVENTOS
+
+### Tipos de registros de auditoria (auditd)
 
 | Nome             | Descrição                                        |
 |------------------|--------------------------------------------------|
@@ -101,3 +134,4 @@ log {
 | USER_END         | Término da sessão de usuário.                   |
 | USER_START       | Início da sessão de usuário.                     |
 
+Referencias: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security_guide/sec-audit_record_types
