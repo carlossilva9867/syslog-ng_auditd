@@ -4,7 +4,7 @@ Este script tem como objetivo automatizar o processo de configuração do envio 
 
 ## Arquitetura
 ![imagem](https://github.com/carlossilva9867/syslog-ng_auditd/blob/main/arquitetura_syslog.png?raw=true)\
-O serviço syslog-ng realiza monitoramento do arquivo de log em /var/log/audit/audit.log, realiza um filtro específico para selecionar chamadas de eventos específicas do auditd como por exemplo match("`type=(USER_CMD)`. Após esse processo de filtragem, os logs resultantes são encaminhados e enviados para um servidor remoto de syslog.
+O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit/audit.log, aplicando um filtro específico para selecionar chamadas de eventos específicas do auditd, como, por exemplo, `match("type=(USER_CMD)")``. Após esse processo de filtragem, os logs resultantes são enviados para um servidor remoto de syslog.
 
 ## Funcionamento do script
 
