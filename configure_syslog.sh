@@ -29,11 +29,6 @@ check_syslog_ng() {
     fi
 }
 
-# 
-
-#
-
-
 # Função para realizar backup dos arquivos de configuração do syslog-ng
 backup_syslog_ng_conf() {
     local arquivo_config="/etc/syslog-ng/syslog-ng.conf"

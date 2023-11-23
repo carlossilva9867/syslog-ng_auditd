@@ -4,7 +4,6 @@
   
 
 ### Objetivo
-
 Este script em bash e a configuração associada do `syslog-ng` foram desenvolvidos com o objetivo de facilitar a configuração do ambiente de monitoramento de eventos de autenticação gerados pelo serviço `auditd`. O script automatiza tarefas como backup, configuração e reinicialização do `syslog-ng` após alterações no arquivo de configuração, bem como a verificação de pré-requisitos importantes.
 
   
