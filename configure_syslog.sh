@@ -1,12 +1,12 @@
 #/bin/bash
 # Configuração do Syslog-ng para Monitoramento de Eventos de Autenticação com Auditd
-# Versão 1.0**
+# Versão 1.0
 #Autor: [Carlos Silva](https://github.com/carlossilva9867)
 
 # ==============================================================
 #     ALTERE AS CONFIGURAÇÕES ABAIXO PARA O SEU SERVIDOR DE SYSLOG
 # ==============================================================
-syslog_host=192.168.15.133
+syslog_host=127.0.0.1
 syslog_port=514
 #_______________________________________________________________
 
@@ -28,6 +28,16 @@ check_syslog_ng() {
         exit 1
     fi
 }
+# Função para verificar se o serviço auditd está instalado
+verificar_auditd() {
+    if command -v auditd >/dev/null 2>&1; then
+        echo "[OK] - Serviço auditd já instalado no sistema operacional."
+    else
+        echo "[ERROR] - Serviço auditd não encontrado. Instale o auditd e execute o script novamente."
+        echo "[INFO] - sudo apt install auditd" 
+        exit 1
+    fi
+}
 
 # Função para realizar backup dos arquivos de configuração do syslog-ng
 backup_syslog_ng_conf() {
@@ -39,6 +49,12 @@ backup_syslog_ng_conf() {
         echo "[ERROR] - Arquivo de configuração não encontrado: $arquivo_config. Não foi possível fazer o backup. do syslog-ng"
         exit 1
     fi
+}
+
+pre_requisitos(){
+    verificar_auditd
+    check_root
+    verificar_auditd
 }
 
 # Função com as configurações do syslog-ng
@@ -99,18 +115,6 @@ restart_service() {
     fi
 }
 
-
-# Função para verificar se o serviço auditd está instalado
-verificar_auditd() {
-    if command -v auditd >/dev/null 2>&1; then
-        echo "[OK] - Serviço auditd já instalado no sistema operacional."
-    else
-        echo "[ERROR] - Serviço auditd não encontrado. Instale o auditd e execute o script novamente."
-        echo "[INFO] - sudo apt install auditd" 
-        exit 1
-    fi
-}
-
 # Função com as configurações do auditd
 auditd_configure() {
   echo "[INFO] - Iniciando a configuração do auditd"
@@ -118,8 +122,7 @@ auditd_configure() {
 
 # Função principal
 main() {
-    check_root
-    check_syslog_ng
+    pre_requisitos
     backup_syslog_ng_conf
     verificar_auditd
     syslog_ng_configure

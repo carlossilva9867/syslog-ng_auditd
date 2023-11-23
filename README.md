@@ -66,11 +66,6 @@ Altere os valores da variável os valores
 **IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
 **PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)\
 
-```
-sed -i 's/syslog_host=.*$/syslog_host=IP_SYSLOG_REMOTO/' configure_syslog.sh
-sed -i 's/syslog_port=.*$/syslog_port=PORTA_SYSLOG_REMOTO/' configure_syslog.sh
-```
-
 Execute o comando para executar o script
 ```
 sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
