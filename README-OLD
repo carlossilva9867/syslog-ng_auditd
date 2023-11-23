@@ -11,9 +11,7 @@ Este script em bash e a configuração associada do `syslog-ng` foram desenvolvi
 ### Pré-requisitos
 
 - O script deve ser executado com privilégios de root ou sudo.
-
 - O serviço `auditd` deve estar instalado e em execução.
-
 - O serviço `syslog-ng` deve estar instalado e em execução.
 
   
