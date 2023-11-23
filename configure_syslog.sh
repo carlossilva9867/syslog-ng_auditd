@@ -124,7 +124,6 @@ auditd_configure() {
 main() {
     pre_requisitos
     backup_syslog_ng_conf
-    verificar_auditd
     syslog_ng_configure
     restart_service    
 }
