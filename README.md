@@ -1,8 +1,26 @@
 
 # syslog-ng_auditd
 
-Este script em bash e a configuração associada do `syslog-ng` foram desenvolvidos com o objetivo de facilitar a configuração do ambiente de monitoramento de eventos de autenticação gerados pelo serviço `auditd`. O script automatiza tarefas como backup, configuração e reinicialização do `syslog-ng` após alterações no arquivo de configuração, bem como a verificação de pré-requisitos importantes.
-  
+## Funcionamento do script
+- Verificar se o serviço syslog está instalado.
+- Verificar se o serviço auditd está instalado.
+- Se os parâmetros de verificação estiverem OK, o script iniciará o processo de configuração do serviço syslog-ng, adicionando as seguintes etapas:
+    - Etapas de Configuração:
+    - Backup de Configuração:
+
+1) Realizar backup dos arquivos de configuração do syslog-ng para garantir a reversibilidade das alterações.
+2) Configuração do syslog-ng para Envio Remoto:
+3) Adicionar configurações ao syslog-ng para direcionar os logs do auditd para um servidor syslog remoto ou repositório remoto.
+4) Reiniciar o serviço syslog-ng para aplicar as alterações feitas na configuração.
+5) Validação da Inicialização do Serviço:
+6) Verificar se o serviço syslog-ng foi reiniciado com sucesso.
+
+## Observações:
+- Certifique-se de executar o script com privilégios de root ou utilizando o sudo.
+- Antes de executar em um ambiente de produção, é recomendável testar o script em um ambiente controlado.
+- Este script foi testado em sistemas operacionais Debian e Red Hat, podendo necessitar de adaptações para outros sistemas Linux.
+- Este script visa simplificar a tarefa de configurar a integração entre o serviço auditd e o syslog-ng, facilitando o monitoramento centralizado de eventos de segurança. Contribuições são bem-vindas para aprimorar e expandir as funcionalidades do script.
+
 
 ### Pré-requisitos
 
@@ -29,6 +47,7 @@ Execute o comando para executar o script
 sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ```
 ### Arquivo de configuração utilizado (syslog-ng):
+Criar o arquivo em /etc/syslog-ng/conf.d/
 
 ```
 # Configuraççao do auditd para envio -> SYSLOG SERVER 
