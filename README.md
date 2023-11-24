@@ -64,7 +64,7 @@ cd syslog-ng_auditd
 
 ### Configuração
 3) Altere os valores da variável os valores abaixo no arquivo no arquivo .env
-- **syslog_host**           - IP do servidor que será o repositorio de logs\
+- **syslog_host**           - IP do servidor que será o repositorio de logs
 - **syslog_port** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)
 ```
 vi .env
