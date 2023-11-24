@@ -60,8 +60,7 @@ pre_requisitos(){
 
 # Função com as configurações do syslog-ng
 syslog_ng_configure() {
-echo  '
-# Configuraççao do auditd para envio -> SYSLOG SERVER 
+echo "# Configuraççao do auditd para envio -> SYSLOG SERVER 
 # Log de origem (auditd)
 source s_auditd {
     file(/var/log/audit/audit.log flags(no-parse));
@@ -70,15 +69,14 @@ source s_auditd {
 ## Filter
 # Filtando somente por tipos de eventos especificos 
 filter f_auditd {
-    #program("auditd");
-    match("type=(USER_CMD|LOGIN|CRED_ACQ)");
+    match('type=(USER_CMD|LOGIN|CRED_ACQ)');
 };
 
 ## Destination 
 # Envio de log via TCP para o syslog server
 destination d_syslog_tcp {
-    syslog("$syslog_host" transport("tcp") 
-    port("$syslog_port")); 
+    syslog($syslog_host transport("tcp") 
+    port($syslog_port)); 
 };
 
 ## Envio
@@ -87,9 +85,7 @@ log {
     source(s_auditd);
     filter(f_auditd);
     destination(d_syslog_tcp);
-};
-
-' > /etc/syslog-ng/conf.d/auditd-to-syslog.conf
+}; " > /etc/syslog-ng/conf.d/auditd-to-syslog.conf
 }
 
 # Função para reiniciar o serviço
