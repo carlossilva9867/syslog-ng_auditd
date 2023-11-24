@@ -61,11 +61,12 @@ cd syslog-ng_auditd
 
 ### Configuração
 3) Altere os valores da variável os valores abaixo no arquivo no arquivo configure_syslog.sh
-
 **IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
 **PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)\
-
-5) Execute o comando para executar o script
+```
+vi configure_syslog.sh
+```
+4) Execute o comando para executar o script
 ```
 sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ```
