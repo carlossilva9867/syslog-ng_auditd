@@ -78,6 +78,7 @@ sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ## Forma manual 
 ### Arquivo de configuração utilizado (syslog-ng):
 Caso queira adicionar a configuração do syslog manualmente no servidor, basta criar um arquivo de configuração em /etc/syslog-ng/conf.d/. Não se esqueça de alterar os valores servidor e porta de acordo com seu repositorio de logs.
+```
 # Configuraççao do auditd para envio -> SYSLOG SERVER 
 # Log de origem (auditd) 1.2
 source s_auditd {
