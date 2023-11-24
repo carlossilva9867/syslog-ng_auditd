@@ -16,7 +16,7 @@ O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit
 
 2) Configuração do syslog-ng para Envio Remoto:
 
-3) Adicionar configurações ao syslog-ng para direcionar os logs do auditd para um servidor syslog remoto ou repositório remoto.
+3) Adicionar configurações ao syslog-ng para direcionar os logs do auditd para um repositório de logs remoto.
 
 4) Reiniciar o serviço syslog-ng para aplicar as alterações feitas na configuração.
 
