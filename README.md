@@ -77,34 +77,32 @@ sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ----
 ## Forma manual 
 ### Arquivo de configuração utilizado (syslog-ng):
-Caso queira adicionar a configuração do syslog manualmente no servidor, basta criar um arquivo de configuração em /etc/syslog-ng/conf.d/. Não se esqueça de alterar os valores $syslog_host e $syslog_port.
-```
-# Configuração AUDITD < SYSLOG > REMOTE LOG
-
-# Log de origem (auditd)
+Caso queira adicionar a configuração do syslog manualmente no servidor, basta criar um arquivo de configuração em /etc/syslog-ng/conf.d/. Não se esqueça de alterar os valores servidor e porta de acordo com seu repositorio de logs.
+# Configuraççao do auditd para envio -> SYSLOG SERVER 
+# Log de origem (auditd) 1.2
 source s_auditd {
-file(/var/log/audit/audit.log flags(no-parse));
+    file(/var/log/audit/audit.log flags(no-parse));
 };
 
-## Filter (OPCIONA) 
-# Filtando por tipos de registros de auditoria
+## Filter
+# Filtando somente por tipos de eventos especificos 
 filter f_auditd {
-	match("type=(USER_CMD|LOGIN|CRED_ACQ)");
+    match("type=(USER_CMD|LOGIN|CRED_ACQ)");
 };
 
-## Declarando qual o servidor e porta que será o repositorio de log
+## Destination 
 # Envio de log via TCP para o syslog server
-	destination d_syslog_tcp {
-	syslog("$syslog_host" transport("tcp")
-	port("$syslog_port"));
+destination d_syslog_tcp {
+    syslog("servidor" transport("tcp") 
+    port("porta")); 
 };
 
 ## Envio
 # Confiurando o envio de log para o syslog-server
-log {
-	source(s_auditd);
-	filter(f_auditd);
-	destination(d_syslog_tcp);
+log { 
+    source(s_auditd);
+    filter(f_auditd);
+    destination(d_syslog_tcp);
 };
 ```
 Reinicie o serviço do syslog-ng
