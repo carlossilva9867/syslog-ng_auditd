@@ -51,9 +51,10 @@ backup_syslog_ng_conf() {
     fi
 }
 
+# Função para verificar os pré requisitos 
 pre_requisitos(){
-    verificar_auditd
     check_root
+    check_syslog_ng
     verificar_auditd
 }
 
