@@ -6,8 +6,8 @@
 # ==============================================================
 #     ALTERE AS CONFIGURAÇÕES ABAIXO PARA O SEU SERVIDOR DE SYSLOG
 # ==============================================================
-syslog_host=127.0.0.1
-syslog_port=514
+export syslog_host=127.0.0.1
+export syslog_port=514
 #_______________________________________________________________
 
 # Função para verificar se o script está sendo executado como root ou com sudo
