@@ -24,6 +24,9 @@ O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit
 
 6) Verificar se o serviço syslog-ng foi reiniciado com sucesso.
 
+### Sistemas operacionais testados
+- [x] Ubuntu
+- [x] Debian
 
 ## Observações:
 
@@ -61,8 +64,8 @@ cd syslog-ng_auditd
 
 ### Configuração
 3) Altere os valores da variável os valores abaixo no arquivo no arquivo configure_syslog.sh
-**IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
-**PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)\
+- **IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
+- **PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)
 ```
 vi configure_syslog.sh
 ```
