@@ -2,9 +2,9 @@
 # Configuração do Syslog-ng para Monitoramento de Eventos de Autenticação com Auditd
 # Versão 1.0
 #Autor: [Carlos Silva](https://github.com/carlossilva9867)
-source .env
-# ==============================================================
 
+# importando configurações do syslog definidos no arquivo .env
+source .env
 # Função para verificar se o script está sendo executado como root ou com sudo
 check_root() {
     if [ "$(id -u)" -ne 0 ]; then
