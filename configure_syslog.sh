@@ -82,7 +82,7 @@ restart_service() {
     fi
 }
 
-# Função com as configurações do auditd
+# Função com as configurações do auditd será implementando na proxima versão
 auditd_configure() {
   echo "[INFO] - Iniciando a configuração do auditd"
 }
