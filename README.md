@@ -1,7 +1,7 @@
-# syslog-ng_auditd
+# Objetivo
 Este script tem como objetivo automatizar o processo de configuração do envio de logs do serviço auditd para um servidor syslog remoto (SIEM), utilizando o serviço syslog-ng presente na maioria dos sistemas operacionais baseados em Linux.
 
-## Arquitetura
+## Arquitetura (syslog-ng)
 ![imagem](https://github.com/carlossilva9867/syslog-ng_auditd/blob/main/img/arquitetura_syslog.png?raw=true)\
 O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit/audit.log, aplicando um filtro específico para selecionar chamadas de eventos específicas do auditd, como, por exemplo, `match("type=(USER_CMD)")`. Após esse processo de filtragem, os logs resultantes são enviados para um servidor remoto de syslog.
 
