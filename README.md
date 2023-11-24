@@ -1,6 +1,5 @@
 # syslog-ng_auditd
-
-Este script tem como objetivo automatizar o processo de configuração do envio de logs do serviço auditd para um servidor syslog remoto (SIEM) ou repositório remoto, utilizando o serviço syslog-ng presente na maioria dos sistemas operacionais baseados em Linux.
+Este script tem como objetivo automatizar o processo de configuração do envio de logs do serviço auditd para um servidor syslog remoto (SIEM), utilizando o serviço syslog-ng presente na maioria dos sistemas operacionais baseados em Linux.
 
 ## Arquitetura
 ![imagem](https://github.com/carlossilva9867/syslog-ng_auditd/blob/main/arquitetura_syslog.png?raw=true)\
@@ -59,9 +58,13 @@ Clone o repositório ou copie o código para o seu sistema.
 ```
 git clone https://github.com/carlossilva9867/syslog-ng_auditd
 ```
+Entre no diretorio que que foi criado
+```
+cd yslog-ng_auditd
+```
 
 ### Configuração
-Altere os valores da variável os valores
+Altere os valores da variável os valores abaixo no arquivo no arquivo configure_syslog.sh
 
 **IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
 **PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)\
@@ -103,6 +106,10 @@ log {
 	filter(f_auditd);
 	destination(d_syslog_tcp);
 };
+```
+Reinicie o serviço do syslog-ng
+```
+systemctl restart syslog-ng 
 ```
 
 
