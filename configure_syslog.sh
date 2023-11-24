@@ -29,7 +29,7 @@ check_syslog_ng() {
     fi
 }
 # Função para verificar se o serviço auditd está instalado
-verificar_auditd() {
+check_auditd() {
     if command -v auditd >/dev/null 2>&1; then
         echo "[OK] - Serviço auditd já instalado no sistema operacional."
     else
@@ -55,7 +55,7 @@ backup_syslog_ng_conf() {
 pre_requisitos(){
     check_root
     check_syslog_ng
-    verificar_auditd
+    check_auditd
 }
 
 # Função com as configurações do syslog-ng
