@@ -88,7 +88,7 @@ log {
     destination(d_syslog_tcp);
 };
 
-' > /etc/syslog-ng/conf.d/qradar-syslog.conf
+' > /etc/syslog-ng/conf.d/auditd-to-syslog.conf
 }
 
 # Função para reiniciar o serviço
