@@ -2,13 +2,8 @@
 # Configuração do Syslog-ng para Monitoramento de Eventos de Autenticação com Auditd
 # Versão 1.0
 #Autor: [Carlos Silva](https://github.com/carlossilva9867)
-
+source .env
 # ==============================================================
-#     ALTERE AS CONFIGURAÇÕES ABAIXO PARA O SEU SERVIDOR DE SYSLOG
-# ==============================================================
-export syslog_host=127.0.0.1
-export syslog_port=514
-#_______________________________________________________________
 
 # Função para verificar se o script está sendo executado como root ou com sudo
 check_root() {
@@ -60,32 +55,7 @@ pre_requisitos(){
 
 # Função com as configurações do syslog-ng
 syslog_ng_configure() {
-echo "# Configuraççao do auditd para envio -> SYSLOG SERVER 
-# Log de origem (auditd)
-source s_auditd {
-    file(/var/log/audit/audit.log flags(no-parse));
-};
-
-## Filter
-# Filtando somente por tipos de eventos especificos 
-filter f_auditd {
-    match('type=(USER_CMD|LOGIN|CRED_ACQ)');
-};
-
-## Destination 
-# Envio de log via TCP para o syslog server
-destination d_syslog_tcp {
-    syslog($syslog_host transport("tcp") 
-    port($syslog_port)); 
-};
-
-## Envio
-# Confiurando o envio de log para o syslog-server
-log { 
-    source(s_auditd);
-    filter(f_auditd);
-    destination(d_syslog_tcp);
-}; " > /etc/syslog-ng/conf.d/auditd-to-syslog.conf
+    cat confs/auditd-to-syslog-example | sed -e "s/servidor/$syslog_host/" -e "s/porta/$syslog_port/" > /etc/syslog-ng/conf.d/auditd-to-syslog.conf
 }
 
 # Função para reiniciar o serviço
