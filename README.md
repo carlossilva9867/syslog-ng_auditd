@@ -49,23 +49,23 @@ O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit
 
 ### Instalação
 
-Clone o repositório ou copie o código para o seu sistema.
+1) Clone o repositório ou copie o código para o seu sistema.
 
 ```
 git clone https://github.com/carlossilva9867/syslog-ng_auditd
 ```
-Entre no diretorio que que foi criado
+2) Entre no diretorio que que foi criado
 ```
 cd yslog-ng_auditd
 ```
 
 ### Configuração
-Altere os valores da variável os valores abaixo no arquivo no arquivo configure_syslog.sh
+3) Altere os valores da variável os valores abaixo no arquivo no arquivo configure_syslog.sh
 
 **IP_SYSLOG_REMOTO**           - IP do servidor que será o repositorio de logs\
 **PORTA_SYSLOG_REMOTO** - Porta de destino do servidor syslog da rede (normalmente é a porta 514)\
 
-Execute o comando para executar o script
+5) Execute o comando para executar o script
 ```
 sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ```
