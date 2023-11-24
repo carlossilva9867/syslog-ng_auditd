@@ -9,12 +9,9 @@ O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit
 
 - Verificar se o serviço syslog está instalado.
 - Verificar se o serviço auditd está instalado.
-- Se os parâmetros de verificação estiverem OK, o script iniciará o processo de configuração do serviço syslog-ng, adicionando as seguintes etapas:
-- Etapas de Configuração:
-- Backup de Configuração:
-
+- Se os parâmetros de verificação estiverem OK, o script iniciará o processo de configuração do serviço syslog-ng.
  
-## Etapas da execução
+## Etapas da execução do script
 1) Realizar backup dos arquivos de configuração do syslog-ng para garantir a reversibilidade das alterações.
 
 2) Configuração do syslog-ng para Envio Remoto:
@@ -27,7 +24,6 @@ O serviço syslog-ng realiza o monitoramento do arquivo de log em /var/log/audit
 
 6) Verificar se o serviço syslog-ng foi reiniciado com sucesso.
 
-  
 
 ## Observações:
 
@@ -75,7 +71,7 @@ sudo chmod +x configure_syslog.sh && sudo ./configure_syslog.sh
 ```
 
 ----
-
+## Forma manual 
 ### Arquivo de configuração utilizado (syslog-ng):
 Caso queira adicionar a configuração do syslog manualmente no servidor, basta criar um arquivo de configuração em /etc/syslog-ng/conf.d/. Não se esqueça de alterar os valores $syslog_host e $syslog_port.
 ```
@@ -111,8 +107,7 @@ Reinicie o serviço do syslog-ng
 ```
 systemctl restart syslog-ng 
 ```
-
-
+---
 ### Tipos de registros de auditoria (auditd)
 
 | Nome             | Descrição                                        |
