@@ -56,7 +56,7 @@ git clone https://github.com/carlossilva9867/syslog-ng_auditd
 ```
 2) Entre no diretorio que que foi criado
 ```
-cd yslog-ng_auditd
+cd syslog-ng_auditd
 ```
 
 ### Configuração
